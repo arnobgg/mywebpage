@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends' Website</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #e0f7fa;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #ff8a80, #ff1744);
+            color: #fff;
+            padding: 2em;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin: 1em 0 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ffeb3b;
+            transform: scale(1.1);
+        }
+
+        /* Main Content Styles */
+        main {
+            padding: 2em;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('images/background.jpg') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .main-content {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 2em;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 1em;
+        }
+
+        .main-content h2 {
+            font-size: 2em;
+            margin-bottom: 0.5em;
+            color: #333;
+        }
+
+        .main-content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #666;
+        }
+
+        .profile-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1em;
+            justify-content: center;
+        }
+
+        .profile-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 250px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .profile-card:hover {
+            transform: scale(1.05);
+        }
+
+        .profile-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .profile-card h3 {
+            margin: 0;
+            padding: 1em;
+            background: #ff1744;
+            color: #fff;
+        }
+
+        .profile-card p {
+            padding: 0 1em 1em;
+            color: #333;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+            justify-content: center;
+            align-items: center;
+            padding: 2em;
+        }
+
+        .modal-content {
+            background: #fff;
+            border-radius: 10px;
+            max-width: 80%;
+            position: relative;
+            padding: 2em;
+            overflow: hidden;
+        }
+
+        .modal-content img {
+            width: 100%;
+            max-width: 500px; /* Adjust to desired max size */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 10px;
+        }
+
+        .modal-content .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .modal-content .close:hover {
+            color: #ff1744;
+        }
+
+        .modal-content .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .modal-content .nav-buttons button {
+            background-color: #ff1744;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .modal-content .nav-buttons button:hover {
+            background-color: #e53935;
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #ff8a80, #ff1744);
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Our Awesome Group</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="videos.html">Videos</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="main-content">
+            <h2>Welcome to Our Website</h2>
+            <p>Explore the amazing profiles of our friends, view our gallery, and watch our favorite videos. We are a group of friends sharing our moments, memories, and fun experiences. Dive in and discover more about us!</p>
+            
+            <div class="profile-cards">
+                <div class="profile-card" onclick="showModal(['i2.jpg', 'i1.jpg', 'i4.jpg'])">
+                    <img src="i2.jpg" alt="Person 1">
+                    <h3>Person 1</h3>
+                    <p>Short bio about Person 1. This is a small description that gives more details about the person.</p>
+                </div>
+                <div class="profile-card" onclick="showModal(['images/person2.jpg', 'images/person2_additional1.jpg'])">
+                    <img src="images/person2.jpg" alt="Person 2">
+                    <h3>Person 2</h3>
+                    <p>Short bio about Person 2. This is a small description that gives more details about the person.</p>
+                </div>
+                <!-- Add more profile cards as needed -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Structure -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImg" src="" alt="Additional Photo">
+            <div class="nav-buttons">
+                <button id="prevBtn" onclick="changeImage(-1)">Previous</button>
+                <button id="nextBtn" onclick="changeImage(1)">Next</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2024 Our Awesome Group. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let images = [];
+        let currentIndex = 0;
+
+        function showModal(imageArray) {
+            images = imageArray;
+            currentIndex = 0;
+            document.getElementById('modalImg').src = images[currentIndex];
+            document.getElementById('myModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            } else if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+            document.getElementById('modalImg').src = images[currentIndex];
+        }
+
+        // Close the modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('myModal')) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
